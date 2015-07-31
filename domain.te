@@ -276,6 +276,7 @@ neverallow { domain -kernel -init -recovery -zygote -vold -update_engine -otapre
 neverallow {
     domain
     -appdomain
+    -audioserver
     -autoplay_app
     -dumpstate
     -shell
