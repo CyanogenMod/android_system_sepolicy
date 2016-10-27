@@ -267,7 +267,7 @@ neverallow { domain -init -ueventd } device:chr_file { open read write };
 # Limit what domains can mount filesystems or change their mount flags.
 # sdcard_type / vfat is exempt as a larger set of domains need
 # this capability, including device-specific domains.
-neverallow { domain -kernel -init -recovery -zygote -vold -sudaemon -update_engine -otapreopt_chroot } { fs_type -sdcard_type }:filesystem { mount remount relabelfrom relabelto };
+neverallow { domain -kernel -init -recovery -zygote -vold -update_engine -otapreopt_chroot -sudaemon} { fs_type -sdcard_type }:filesystem { mount remount relabelfrom relabelto };
 
 #
 # Assert that, to the extent possible, we're not loading executable content from
@@ -512,7 +512,7 @@ neverallow {
 
 # Only domains spawned from zygote and runas may have the appdomain attribute.
 neverallow { domain -runas -zygote } {
-  appdomain -shell userdebug_or_eng(`-su -sudaemon') -bluetooth userdebug_or_eng(`-qti-testscripts')
+  appdomain -shell userdebug_or_eng(`-su -sudaemon') -bluetooth -sudaemon userdebug_or_eng(`-qti-testscripts')
 }:process { transition dyntransition };
 
 # Minimize read access to shell- or app-writable symlinks.
