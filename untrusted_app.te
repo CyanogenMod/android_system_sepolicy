@@ -213,3 +213,6 @@ neverallow untrusted_app tun_device:chr_file open;
 # Only allow appending to /data/anr/traces.txt (b/27853304, b/18340553)
 neverallow untrusted_app anr_data_file:file ~{ open append };
 neverallow untrusted_app anr_data_file:dir ~search;
+
+# Fixes Snapchat crash on 7.0+ roms
+allow untrusted_app proc_stat:file read;
